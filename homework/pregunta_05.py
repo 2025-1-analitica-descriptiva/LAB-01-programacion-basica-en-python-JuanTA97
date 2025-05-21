@@ -5,13 +5,37 @@ solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
 
-
 def pregunta_05():
-    """
-    Retorne una lista de tuplas con el valor maximo y minimo de la columna 2
-    por cada letra de la columa 1.
+    
+    list = []
 
-    Rta/
-    [('A', 9, 2), ('B', 9, 1), ('C', 9, 0), ('D', 8, 3), ('E', 9, 1)]
+    with open("files/input/data.csv", "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.split("\t")
+            list.append((line[0], int(line[1])))
 
-    """
+        secuence = {}
+
+        for letra, numero in list:
+            if letra not in secuence:
+                secuence[letra] = []
+            secuence[letra].append(numero)
+
+        resultado = []
+        for letra in sorted(secuence.keys()):
+            maximo = max(secuence[letra])
+            minimo = min(secuence[letra])
+            resultado.append((letra, maximo, minimo))
+
+        return resultado
+
+pregunta_05()
+
+"""
+Retorne una lista de tuplas con el valor maximo y minimo de la columna 2
+por cada letra de la columa 1.
+
+Rta/
+[('A', 9, 2), ('B', 9, 1), ('C', 9, 0), ('D', 8, 3), ('E', 9, 1)]
+
+"""

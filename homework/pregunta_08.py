@@ -5,9 +5,30 @@ solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
 
-
 def pregunta_08():
-    """
+    lista = []
+
+    with open("files/input/data.csv", "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.split("\t")
+            lista.append((int(line[1]), line[0]))
+        
+        dep = {}
+
+        for letra, numero in lista:
+            if letra not in dep:
+                dep[letra] = set()
+            dep[letra].add(numero)
+
+        resultado = []
+        for letra in sorted(dep.keys()):
+            resultado.append((letra, sorted(dep[letra])))
+        return resultado
+
+
+pregunta_08()
+    
+"""
     Genere una lista de tuplas, donde el primer elemento de cada tupla
     contiene  el valor de la segunda columna; la segunda parte de la tupla
     es una lista con las letras (ordenadas y sin repetir letra) de la
